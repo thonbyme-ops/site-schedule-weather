@@ -1,4 +1,4 @@
-// app.js – 화면 동작 (목록 그리기, 일정 추가)
+// app.js – 화면 동작 (목록 그리기, 일정 추가, 날씨 받기, md 내려받기)
 
 let baseTasks = [];         // data/tasks.json 에서 읽은 일정
 let tasks = [];
@@ -44,10 +44,6 @@ async function loadWeather() {
   renderTasks();
 }
 
-function weatherText(w) {
-  return w ? w.tempMax + '℃ · ' + w.windMax + 'm/s · ' + w.rainProb + '%' : '-';
-}
-
 function renderTasks() {
   const body = document.getElementById('taskList');
   body.innerHTML = '';
@@ -85,8 +81,20 @@ function addTask(e) {
   renderTasks();
 }
 
+// 04 단원 : 지금 표를 md 파일로 내려받기
+function downloadMarkdown() {
+  const date = todayStr();
+  const blob = new Blob([toMarkdown(tasks, weatherByRegion, date)], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '현장일정_판단_' + date + '.md';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
 async function start() {
   document.getElementById('taskForm').addEventListener('submit', addTask);
+  document.getElementById('mdBtn').addEventListener('click', downloadMarkdown);
   await loadBaseTasks();
   loadTasks();
   renderTasks();

@@ -45,4 +45,35 @@ function judge(kind, w) {
   return { level: 'ok', text: '진행' };
 }
 
-if (typeof module !== 'undefined') module.exports = { RULES, REGIONS, weatherUrl, toWeather, applyTest, judge };
+// 날씨 칸 글자 (화면 표와 md가 같이 씀)
+function weatherText(w) {
+  return w ? w.tempMax + '℃ · ' + w.windMax + 'm/s · ' + w.rainProb + '%' : '-';
+}
+
+// 04 단원 : 오늘 판단을 마크다운 표로 (칸 안의 | 는 \| 로 바꿔 표가 깨지지 않게)
+function toMarkdown(tasks, weatherByRegion, dateStr) {
+  const cell = (v) => String(v).replace(/\|/g, '\\|');
+  const lines = [
+    '# 현장 일정 판단 (' + dateStr + ')',
+    '',
+    '| 일정 | 지역 | 구분 | 담당 | 날씨 | 판단 |',
+    '|---|---|---|---|---|---|',
+  ];
+  for (const t of tasks) {
+    const w = weatherByRegion[t.region];
+    const row = [t.title, t.region, t.kind, t.owner, weatherText(w), judge(t.kind, w).text];
+    lines.push('| ' + row.map(cell).join(' | ') + ' |');
+  }
+  lines.push('');
+  lines.push('판단 기준 : 고소 풍속 ' + RULES.wind + ' m/s 이상 중지 검토 · 강수확률 ' + RULES.rain
+    + '% 이상 우천 주의 · 최고 기온 ' + RULES.heat + '℃ 이상 폭염 휴식');
+  return lines.join('\n') + '\n';
+}
+
+// 오늘 날짜 YYYY-MM-DD (toISOString 은 세계 표준시라 한국 오전 9시 전엔 하루 밀림)
+function todayStr(d = new Date()) {
+  const p = (n) => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
+if (typeof module !== 'undefined') module.exports = { RULES, REGIONS, weatherUrl, toWeather, applyTest, judge, weatherText, toMarkdown, todayStr };
