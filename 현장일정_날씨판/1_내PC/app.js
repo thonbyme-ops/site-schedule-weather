@@ -11,11 +11,31 @@ const SAMPLE_TASKS = [
 ];
 
 let tasks = [];
-let weatherByRegion = {};   // 03 단원에서 지역별 날씨를 넣음
+let weatherByRegion = {};
 
 function loadTasks() {
   const saved = JSON.parse(localStorage.getItem('wx_added') || '[]');
   tasks = SAMPLE_TASKS.concat(saved);
+}
+
+// 03 단원 : 지역마다 API 요청 → 응답 JSON → 숫자 3개 (실패해도 목록은 그대로)
+async function loadWeather() {
+  const box = document.getElementById('weatherBox');
+  const test = new URLSearchParams(location.search).get('test');
+  const failed = [];
+  for (const region of Object.keys(REGIONS)) {
+    try {
+      const res = await fetch(weatherUrl(region));
+      if (!res.ok) throw new Error('응답 코드 ' + res.status);
+      weatherByRegion[region] = applyTest(toWeather(await res.json()), test);
+    } catch (err) {
+      failed.push(region + '(' + err.message + ')');
+    }
+  }
+  box.textContent = failed.length
+    ? '날씨를 받지 못한 지역 : ' + failed.join(', ') + ' — 목록은 그대로 볼 수 있음'
+    : '오늘 날씨 : Open-Meteo 예보 (최고 기온 · 최대 풍속 · 강수확률)' + (test === 'wind' ? '  [시험: 풍속 12 m/s]' : '');
+  renderTasks();
 }
 
 function weatherText(w) {
@@ -62,3 +82,4 @@ function addTask(e) {
 document.getElementById('taskForm').addEventListener('submit', addTask);
 loadTasks();
 renderTasks();
+loadWeather();
