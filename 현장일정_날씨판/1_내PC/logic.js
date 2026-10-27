@@ -76,4 +76,11 @@ function todayStr(d = new Date()) {
   return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
 }
 
-if (typeof module !== 'undefined') module.exports = { RULES, REGIONS, weatherUrl, toWeather, applyTest, judge, weatherText, toMarkdown, todayStr };
+// 04 단원 : config.js 검사 (빈 자리 · 비밀 키면 이유를 돌려줌, 괜찮으면 '')
+function checkConfig(url, key) {
+  if (!url || !key || url.indexOf('여기에') >= 0 || key.indexOf('여기에') >= 0) return 'config.js 에 주소와 공개용 키를 넣어 주세요';
+  if (/^sb_secret_/.test(key) || key.indexOf('service_role') >= 0) return 'config.js 에 비밀 키가 들어 있음 — 공개용 키로 바꾸세요';
+  return '';
+}
+
+if (typeof module !== 'undefined') module.exports = { RULES, REGIONS, weatherUrl, toWeather, applyTest, judge, weatherText, toMarkdown, todayStr, checkConfig };

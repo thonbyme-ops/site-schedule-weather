@@ -6,15 +6,17 @@
 
 ## 기술 스택 (변경 금지)
 - HTML + CSS + 순수 JavaScript만 사용한다. (React 등 프레임워크, 빌드 도구 사용 금지)
-- 데이터는 코드에 쓰지 않고 data/ 폴더의 JSON 파일에 둔다.
-- data/*.json 을 읽으므로 확인은 배포 주소에서 한다. (더블클릭으로 열면 브라우저가 파일 읽기를 막음)
+- 일정 데이터는 코드에 쓰지 않고 Supabase 표 wx_tasks 에 둔다. 표 구조 · 값 규칙 · 처음 데이터는 setup.sql 에 둔다.
+- 외부 스크립트는 supabase-js 하나만 쓴다. (버전 고정)
+- index.html 은 supabase-js → config.js → logic.js → app.js 순서로 불러온다.
 
 ## 폴더 구조
 - index.html : 화면 구조
 - style.css  : 디자인
 - logic.js   : 판단 규칙 · API 주소 · 응답 해석 (화면을 다루는 코드 금지)
-- app.js     : 화면 동작 (목록 그리기, 일정 추가, 날씨 받기)
-- data/tasks.json : 일정 목록 (가상 데이터)
+- app.js     : 화면 동작 (목록 그리기, 일정 추가, 날씨 받기, md 내려받기)
+- config.js  : Supabase 주소와 공개용 키 두 줄만
+- setup.sql  : wx_tasks 표 만들기 (SQL Editor 에서 직접 실행)
 - PRD.md · CLAUDE.md · README.md : 문서
 
 ## 작업 방식
@@ -25,4 +27,5 @@
 ## 보안 · 데이터 규칙
 - 가상 데이터만 사용한다. 실제 이름 · 연락처 · 기관 내부 자료를 넣지 않는다.
 - 사용자가 입력한 글자는 textContent 로 표시한다.
-- 비밀 키는 코드 · 채팅 · GitHub 에 넣지 않는다.
+- 비밀 키는 코드 · 채팅 · GitHub 에 넣지 않는다. Supabase 비밀 키(Secret · service_role)는 config.js 에도 넣지 않는다.
+- 지역 · 구분 값 규칙은 화면뿐 아니라 DB(check)에서도 막는다.
