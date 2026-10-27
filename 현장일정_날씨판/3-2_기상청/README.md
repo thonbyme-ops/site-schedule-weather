@@ -4,7 +4,7 @@
 
 ## 여는 법
 - 내 PC : `index.html` 더블클릭
-- 인터넷 (기상청 예보) : Vercel 주소 — 배포 후 여기에 적기
+- 인터넷 (기상청 예보) : https://site-schedule-weather-kma.vercel.app
 - 내 PC 더블클릭 · GitHub Pages 에서는 서버 함수가 없어 Open-Meteo 로 대신 보여 줌
 
 ## 파일
@@ -15,6 +15,7 @@
 | logic.js | 판단 규칙 · 기상청 주소 · 응답 해석 |
 | app.js | 화면 동작 (기상청 먼저, 실패하면 Open-Meteo) |
 | api/kma.js | Vercel 서버 함수 — 키를 붙여 기상청을 부름 |
+| vercel.json | 서버 함수를 서울(icn1)에서 실행 — 공공데이터포털은 국내에서 부르는 게 안정적 |
 | .env.example | 필요한 키 이름 견본 (진짜 키는 .env · Vercel 에만) |
 | PRD.md | 무엇을 · 왜 만드는지 |
 | CLAUDE.md | AI가 지킬 작업 규칙 |
