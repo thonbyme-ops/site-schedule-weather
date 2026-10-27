@@ -4,7 +4,7 @@
 
 ## 여는 법
 - 내 PC : `index.html` 더블클릭
-- 인터넷 : (배포 후 Vercel 주소를 여기에 적기)
+- 인터넷 : [GitHub Pages](https://thonbyme-ops.github.io/site-schedule-weather/%ED%98%84%EC%9E%A5%EC%9D%BC%EC%A0%95_%EB%82%A0%EC%94%A8%ED%8C%90/3_API/)
 
 ## 파일
 | 파일 | 역할 |
