@@ -8,13 +8,15 @@
 
 ## 기술 스택 (변경 금지)
 - HTML + CSS + 순수 JavaScript만 사용한다. (React 등 프레임워크, 빌드 도구 사용 금지)
-- index.html 을 더블클릭해서 열 수 있어야 한다.
+- 데이터는 코드에 쓰지 않고 data/ 폴더의 JSON 파일에 둔다.
+- data/*.json 을 읽으므로 확인은 배포 주소에서 한다. (더블클릭으로 열면 브라우저가 파일 읽기를 막음)
 
 ## 폴더 구조
 - index.html : 화면 구조
 - style.css  : 디자인
-- logic.js   : 판단 규칙만 (화면을 다루는 코드 금지)
-- app.js     : 화면 동작 (목록 그리기, 일정 추가)
+- logic.js   : 판단 규칙 · API 주소 · 응답 해석 (화면을 다루는 코드 금지)
+- app.js     : 화면 동작 (목록 그리기, 일정 추가, 날씨 받기)
+- data/tasks.json : 일정 목록 (가상 데이터)
 - PRD.md · AGENTS.md · CLAUDE.md · README.md : 문서
 
 ## 작업 방식
