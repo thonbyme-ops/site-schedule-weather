@@ -102,6 +102,7 @@ function addTask(e) {
   renderTasks();
 }
 
+document.getElementById('todayBox').textContent = formatDate(new Date());
 document.getElementById('taskForm').addEventListener('submit', addTask);
 loadTasks();
 renderTasks();

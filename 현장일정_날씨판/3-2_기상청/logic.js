@@ -39,6 +39,12 @@ function judge(kind, w) {
   return { level: 'ok', text: '진행' };
 }
 
+// 날짜를 YYYY-MM-DD 글자로
+function formatDate(d) {
+  const p = (n) => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
 // 시험용 날씨 : 주소 끝 ?test=wind · rain · heat (오늘 날씨가 맑아도 규칙을 확인)
 function applyTest(w, test) {
   if (!w || !test) return w;
@@ -90,6 +96,6 @@ function kmaToWeather(json) {
 }
 
 if (typeof module !== 'undefined') module.exports = {
-  RULES, REGIONS, weatherUrl, toWeather, judge, applyTest,
+  RULES, REGIONS, weatherUrl, toWeather, judge, applyTest, formatDate,
   KMA_GRID, kmaBaseTime, kmaUrl, kmaToWeather,
 };
