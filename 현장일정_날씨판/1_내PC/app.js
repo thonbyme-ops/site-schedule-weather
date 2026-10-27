@@ -97,6 +97,7 @@ function downloadMarkdown() {
 }
 
 async function start() {
+  document.getElementById('todayBox').textContent = todayStr();
   document.getElementById('taskForm').addEventListener('submit', addTask);
   document.getElementById('mdBtn').addEventListener('click', downloadMarkdown);
   dbProblem = window.supabase
