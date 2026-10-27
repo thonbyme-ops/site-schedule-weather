@@ -21,6 +21,8 @@
 - app.js     : 화면 동작 (목록 그리기, 일정 추가, **03 단원 변경** 날씨 받기 loadWeather)
 - **03-2 변경** logic.js 에 기상청 격자(KMA_GRID) · 발표 시각(kmaBaseTime) · 주소(kmaUrl) · 응답 해석(kmaToWeather)
 - **03-2 변경** api/kma.js : Vercel 서버 함수 (키는 Vercel 환경변수 KMA_KEY, 코드에 없음)
+- **F-07** api/kma.js 는 그 지역의 Supabase wx_tasks 일정과 판단도 돌려준다. wx_tasks 는 읽기만 한다.
+- **F-07** config.js : Supabase 주소와 공개용 키 두 줄만 (REST 주소는 logic.js 의 wxTasksUrl)
 
 ## 작업 방식
 1. 코드를 고치기 전에 계획(수정할 파일과 이유)을 먼저 보여 주고 승인을 받는다.
@@ -31,4 +33,4 @@
 ## 보안 · 데이터 규칙
 - 가상 데이터만 사용한다. 실제 이름 · 연락처 · 기관 내부 자료를 넣지 않는다.
 - 사용자가 입력한 글자는 textContent 로 표시한다.
-- 비밀 키는 코드 · 채팅 · GitHub 에 넣지 않는다.
+- 비밀 키는 코드 · 채팅 · GitHub 에 넣지 않는다. Supabase 비밀 키(Secret · service_role)는 config.js 에도 넣지 않는다.

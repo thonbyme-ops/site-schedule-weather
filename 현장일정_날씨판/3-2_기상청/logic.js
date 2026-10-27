@@ -95,7 +95,21 @@ function kmaToWeather(json) {
   return { tempMax: max('TMP'), windMax: max('WSD'), rainProb: max('POP') };
 }
 
+// ── F-07 : Supabase 표 wx_tasks 에서 한 지역 일정 읽기 (REST 주소) ──
+function wxTasksUrl(supabaseUrl, region) {
+  return supabaseUrl + '/rest/v1/wx_tasks?select=title,region,kind,owner'
+    + '&region=eq.' + encodeURIComponent(region) + '&order=id';
+}
+
+// 일정마다 판단을 붙임 (w가 없으면 모두 '날씨 확인 전')
+function judgeTasks(tasks, w) {
+  return tasks.map((t) => {
+    const r = judge(t.kind, w);
+    return { title: t.title, kind: t.kind, owner: t.owner, judge: r.text, level: r.level };
+  });
+}
+
 if (typeof module !== 'undefined') module.exports = {
   RULES, REGIONS, weatherUrl, toWeather, judge, applyTest, formatDate,
-  KMA_GRID, kmaBaseTime, kmaUrl, kmaToWeather,
+  KMA_GRID, kmaBaseTime, kmaUrl, kmaToWeather, wxTasksUrl, judgeTasks,
 };
