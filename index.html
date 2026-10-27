@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>현장 일정 날씨판 · 단계별 실습</title>
+  <style>
+    body { font-family: "Malgun Gothic", sans-serif; max-width: 920px; margin: 0 auto; padding: 16px; background: #f4f7f2; color: #222; }
+    header h1 { margin: 8px 0 0; color: #2f6b22; }
+    .sub { margin: 4px 0 16px; color: #666; }
+    .list { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
+    .card { display: block; background: #fff; border: 1px solid #d5e3c9; border-radius: 8px; padding: 14px 16px; color: inherit; text-decoration: none; }
+    a.card:hover { border-color: #4e8a36; box-shadow: 0 2px 6px rgba(78, 138, 54, .15); }
+    .step { display: inline-block; background: #4e8a36; color: #fff; border-radius: 4px; padding: 2px 8px; font-size: 13px; margin-right: 6px; }
+    h2 { display: inline; font-size: 18px; margin: 0; }
+    .card p { margin: 8px 0 0; font-size: 14px; color: #555; }
+    .note { color: #b26a00; }
+    footer { margin-top: 20px; font-size: 13px; color: #888; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>현장 일정 날씨판</h1>
+    <p class="sub">단계별 실습 결과물 모음 (교육용 가상 데이터)</p>
+  </header>
+
+  <ul class="list">
+    <li>
+      <a class="card" href="현장일정_날씨판/1_내PC/">
+        <span class="step">1</span><h2>내 PC</h2>
+        <p>화면과 판단 규칙만 있는 기본 버전. 일정은 브라우저 안에서만 추가됩니다.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="현장일정_날씨판/3_API/">
+        <span class="step">3</span><h2>날씨 API 연결</h2>
+        <p>지역별 실시간 날씨를 불러와 일정마다 진행 · 주의 · 중지를 판단합니다.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="현장일정_날씨판/4-1_JSON_md/">
+        <span class="step">4-1</span><h2>JSON 파일 저장</h2>
+        <p>일정 데이터를 <code>data/tasks.json</code> 파일에서 읽어 옵니다.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="현장일정_날씨판/4-3_Supabase/">
+        <span class="step">4-3</span><h2>Supabase 연결</h2>
+        <p>온라인 데이터베이스에 일정을 저장합니다.
+          <span class="note">config.js 에 Supabase 주소 · 공개용 키를 넣어야 동작합니다.</span></p>
+      </a>
+    </li>
+  </ul>
+
+  <footer>4-2 SQLite 단계는 내 PC에서 Python으로 실행하는 실습이라 웹 화면이 없습니다.</footer>
+</body>
+</html>
